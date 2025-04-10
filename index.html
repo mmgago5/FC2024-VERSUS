@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partido Clásico FIFA 24</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #1d1f27;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      padding: 20px;
+      background: #2c2f3f;
+      border-radius: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .team {
+      text-align: center;
+      padding: 20px;
+      background: #393d50;
+      border-radius: 15px;
+      width: 200px;
+      transition: transform 0.3s ease;
+    }
+    .team:hover {
+      transform: scale(1.05);
+    }
+    .team img {
+      width: 100px;
+      height: auto;
+    }
+    .rating {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .vs {
+      font-size: 2rem;
+      margin: 0 20px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Partido Clásico</h1>
+  <div class="container">
+    <div class="team" id="team1">
+      <h2 id="team1-name">Equipo 1</h2>
+      <img id="team1-logo" src="" alt="Logo equipo 1" />
+      <div class="rating" id="team1-stats"></div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="team" id="team2">
+      <h2 id="team2-name">Equipo 2</h2>
+      <img id="team2-logo" src="" alt="Logo equipo 2" />
+      <div class="rating" id="team2-stats"></div>
+    </div>
+  </div>
+  <button onclick="generateMatch()">Generar Equipos</button>  <script>
+    const teams = [
+      { name: 'Atlético de Madrid', logo: 'https://upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg', stats: { del: 85, med: 83, def: 81 } },
+      { name: 'PSG', logo: 'https://upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg', stats: { del: 87, med: 81, def: 81 } },
+      { name: 'Real Madrid', logo: 'https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg', stats: { del: 88, med: 86, def: 84 } },
+      { name: 'Barcelona', logo: 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg', stats: { del: 86, med: 84, def: 82 } },
+      { name: 'Manchester City', logo: 'https://upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg', stats: { del: 89, med: 87, def: 85 } },
+      { name: 'Bayern Munich', logo: 'https://upload.wikimedia.org/wikipedia/en/1/1f/FC_Bayern_München_logo_%282017%29.svg', stats: { del: 87, med: 85, def: 84 } },
+      { name: 'Juventus', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg', stats: { del: 83, med: 81, def: 80 } },
+      { name: 'Liverpool', logo: 'https://upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg', stats: { del: 85, med: 82, def: 81 } },
+      { name: 'Arsenal', logo: 'https://upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg', stats: { del: 84, med: 83, def: 82 } },
+      { name: 'Inter de Milán', logo: 'https://upload.wikimedia.org/wikipedia/en/0/05/Inter_Milan.svg', stats: { del: 83, med: 80, def: 81 } }
+    ];
+
+    function getRandomTeam(exclude) {
+      let team;
+      do {
+        team = teams[Math.floor(Math.random() * teams.length)];
+     
